@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "7321941572",
+    "project_id": "viaterra-60944",
+    "storage_bucket": "viaterra-60944.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:7321941572:android:34a0b109491c23c51cae11",
+        "android_client_info": {
+          "package_name": "com.example.viaterra"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5GmzOHp96qXr6-pNaYQK55e-XzWMIBt8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
