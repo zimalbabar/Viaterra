@@ -10,16 +10,24 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.viaterra.adapter.EarthquakeAdapter
-import com.example.viaterra.adapter.VolcanoAdapter
+
 import android.Manifest
+import android.util.Log
 
 import android.widget.Toast
-import com.example.viaterra.Earthquake
-import com.example.viaterra.Volcano
+import com.example.viaterra.adapter.AlertAdapter
 import com.example.viaterra.api.RetrofitClient
 import com.example.viaterra.model.EarthquakeResponse
+import com.example.viaterra.model.NoaaResponse
+import com.example.viaterra.model.TornadoProperties
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+
+import com.example.viaterra.util.SettingsManager
 
 
 class DisastersActivity : AppCompatActivity() {
@@ -31,9 +39,15 @@ class DisastersActivity : AppCompatActivity() {
     lateinit var rvEarthquakes: RecyclerView
     lateinit var tvAlertStatus: TextView
     lateinit var tvLastUpdate: TextView
-    lateinit var rvVolcanoes: RecyclerView
+    lateinit var rvTornadoes: RecyclerView
 
     lateinit var tvLocation: TextView
+
+
+    override fun onResume() {
+        super.onResume()
+        checkLocationPermission()
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,14 +60,45 @@ class DisastersActivity : AppCompatActivity() {
 
         rvEarthquakes.layoutManager = LinearLayoutManager(this)
 
-        rvVolcanoes = findViewById(R.id.rvVolcanoes)
-        rvVolcanoes.layoutManager = LinearLayoutManager(this)
+        rvTornadoes = findViewById(R.id.rvTornadoes)
+        rvTornadoes.layoutManager = LinearLayoutManager(this)
 
         tvLocation = findViewById(R.id.tvLocation)
 
 
+        rvTornadoes.layoutManager = LinearLayoutManager(this)
 
-        loadVolcanoData()
+//        RetrofitClient.Tornadoapi.getActiveAlerts().enqueue(object : Callback<NoaaResponse> {
+//
+//                override fun onResponse(
+//                    call: Call<NoaaResponse>,
+//                    response: Response<NoaaResponse>
+//                ) {
+//                    if (response.isSuccessful) {
+//                        val tornadoAlerts: List<TornadoProperties> = response.body()?.features
+//                            ?.map { it.properties } ?: emptyList()
+//
+//                        rvTornadoes.adapter = AlertAdapter(tornadoAlerts)
+//                    }
+//
+//                }
+//
+//                override fun onFailure(
+//                    call: Call<NoaaResponse>,
+//                    t: Throwable
+//                ) {
+//                    Toast.makeText(
+//                        this@DisastersActivity,
+//                        "Failed to load tornado alerts",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                }
+//            })
+
+        loadTornadoes()
+
+
+
 
         findViewById<Button>(R.id.btnSettings).setOnClickListener {
             val intent= Intent(this, SettingsActivity::class.java)
@@ -62,7 +107,54 @@ class DisastersActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         checkLocationPermission()
 
+        val btnRefresh = findViewById<Button>(R.id.btnRefresh)
+
+        btnRefresh.setOnClickListener {
+            Toast.makeText(this, "Fetching data...", Toast.LENGTH_SHORT).show()
+            refreshData()
+        }
+
+
     }
+
+    private fun refreshData() {
+        tvLastUpdate.text = "Fetching data..."
+
+        // Always re-read saved settings
+        val minMag = SettingsManager.getMinMagnitude(this)
+        val radius = SettingsManager.getRadius(this)
+
+        Log.d("REFRESH", "MinMag=$minMag Radius=$radius")
+
+        checkLocationPermission()
+        loadTornadoes()
+    }
+
+    private fun loadTornadoes() {
+        val tornadoesEnabled = SettingsManager.tornadoAlertsEnabled(this)
+        if (!tornadoesEnabled) {
+            rvTornadoes.adapter = AlertAdapter(emptyList())
+            return
+        }
+
+        RetrofitClient.Tornadoapi.getActiveAlerts().enqueue(object : Callback<NoaaResponse> {
+            override fun onResponse(call: Call<NoaaResponse>, response: Response<NoaaResponse>) {
+                if (response.isSuccessful) {
+                    val tornadoAlerts: List<TornadoProperties> = response.body()?.features
+                        ?.map { it.properties } ?: emptyList()
+
+                    rvTornadoes.adapter = AlertAdapter(tornadoAlerts)
+                }
+            }
+
+            override fun onFailure(call: Call<NoaaResponse>, t: Throwable) {
+                Toast.makeText(this@DisastersActivity, "Failed to load tornado alerts", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+
+
 
 //    private fun loadDashboardData() {
 //        RetrofitClient.api.getEarthquakes()
@@ -105,7 +197,68 @@ class DisastersActivity : AppCompatActivity() {
 
 
 
+//    private fun loadDashboardData(userLat: Double, userLon: Double) {
+//        val minMag = SettingsManager.getMinMagnitude(this)
+//        val maxRadiusKm = SettingsManager.getRadius(this)
+//
+//        RetrofitClient.api.getEarthquakes()
+//            .enqueue(object : retrofit2.Callback<EarthquakeResponse> {
+//                override fun onResponse(
+//                    call: retrofit2.Call<EarthquakeResponse>,
+//                    response: retrofit2.Response<EarthquakeResponse>
+//                ) {
+//                    val earthquakes = response.body()?.features?.mapNotNull {
+//                        val quakeLat = it.geometry.coordinates[1]
+//                        val quakeLon = it.geometry.coordinates[0]
+//                        val dist = distanceInMiles(userLat, userLon, quakeLat, quakeLon)
+//
+//                        val distanceKm = dist * 1.609
+//
+//                        if (distanceKm <= maxRadiusKm &&
+//                            (it.properties.mag ?: 0.0) >= minMag) {
+//
+//
+//                           // if (dist <= 1000) { // within 100 miles
+//                            Earthquake(
+//                                magnitude = it.properties.mag?.toString() ?: "N/A",
+//                                location = it.properties.place ?: "Unknown",
+//                                time = formatTime(it.properties.time),
+//                                distance = String.format("%.1f miles", dist)
+//                            )
+//                        } else null
+//                    } ?: emptyList()
+//
+//                    rvEarthquakes.adapter = EarthquakeAdapter(earthquakes) { earthquake ->
+//                        val intent = Intent(this@DisastersActivity, AlertActivity::class.java)
+//                        intent.putExtra("magnitude", earthquake.magnitude)
+//                        intent.putExtra("location", earthquake.location)
+//                        intent.putExtra("time", earthquake.time)
+//                        startActivity(intent)
+//                    }
+//
+//                    tvAlertStatus.text =
+//                        if (earthquakes.isEmpty()) "No nearby quakes" else "Nearby Earthquakes"
+//                    tvLastUpdate.text = "Last Updated: Just now"
+//                }
+//
+//                override fun onFailure(call: retrofit2.Call<EarthquakeResponse>, t: Throwable) {
+//                    tvAlertStatus.text = "Failed to load data"
+//                }
+//            })
+//    }
+
+
     private fun loadDashboardData(userLat: Double, userLon: Double) {
+        val minMag = SettingsManager.getMinMagnitude(this)
+        val maxRadiusKm = SettingsManager.getRadius(this)
+        val earthquakesEnabled = SettingsManager.earthquakeAlertsEnabled(this)
+
+        if (!earthquakesEnabled) {
+            tvAlertStatus.text = "Earthquake alerts are disabled"
+            rvEarthquakes.adapter = EarthquakeAdapter(emptyList()) {}
+            return
+        }
+
         RetrofitClient.api.getEarthquakes()
             .enqueue(object : retrofit2.Callback<EarthquakeResponse> {
                 override fun onResponse(
@@ -116,8 +269,11 @@ class DisastersActivity : AppCompatActivity() {
                         val quakeLat = it.geometry.coordinates[1]
                         val quakeLon = it.geometry.coordinates[0]
                         val dist = distanceInMiles(userLat, userLon, quakeLat, quakeLon)
+                        val distanceKm = dist * 1.609
 
-                        if (dist <= 1000) { // within 100 miles
+                        if (distanceKm <= maxRadiusKm &&
+                            (it.properties.mag ?: 0.0) >= minMag) {
+
                             Earthquake(
                                 magnitude = it.properties.mag?.toString() ?: "N/A",
                                 location = it.properties.place ?: "Unknown",
@@ -167,26 +323,24 @@ class DisastersActivity : AppCompatActivity() {
             .toString()
     }
 
-    private fun loadVolcanoData() {
-        val volcanoes = listOf(
-            Volcano(
-                "Mount St. Helens",
-                "Washington, USA",
-                "120 km",
-                "Seismic activity detected",
-                "3 days ago",
-                "NORMAL"
-            ),
-            Volcano("Mount Fuji", "Japan", "250 km", "No activity", "7 days ago", "NORMAL"),
-            Volcano("Eyjafjallajökull", "Iceland", "300 km", "Minor tremors", "1 day ago", "WATCH")
-        )
+//    private fun loadVolcanoData() {
+//        val volcanoes = listOf(
+//            Volcano(
+//                "Mount St. Helens",
+//                "Washington, USA",
+//                "120 km",
+//                "Seismic activity detected",
+//                "3 days ago",
+//                "NORMAL"
+//            ),
+//            Volcano("Mount Fuji", "Japan", "250 km", "No activity", "7 days ago", "NORMAL"),
+//            Volcano("Eyjafjallajökull", "Iceland", "300 km", "Minor tremors", "1 day ago", "WATCH")
+//        )
 
-        rvVolcanoes.adapter = VolcanoAdapter(volcanoes) { volcano ->
-            // TODO: Open Volcano Detail Activity if you want
-        }
-
-
-    }
+//        rvVolcanoes.adapter = VolcanoAdapter(volcanoes) { volcano ->
+//            // TODO: Open Volcano Detail Activity if you want
+//        }
+ //   }
 
 
     private fun checkLocationPermission() {
@@ -221,6 +375,10 @@ class DisastersActivity : AppCompatActivity() {
     }
 
     private fun getDeviceLocation() {
+        if (!SettingsManager.autoLocationEnabled(this)) {
+            tvLocation.text = "Auto-location disabled"
+            return
+        }
         if (ActivityCompat.checkSelfPermission(
                 this,
                 Manifest.permission.ACCESS_FINE_LOCATION

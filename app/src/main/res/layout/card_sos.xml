@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- SOS Icon -->
+    <ImageView
+        android:id="@+id/sos_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@android:drawable/sym_call_incoming"
+        android:contentDescription="SOS Icon"
+        android:tint="#FFFFFF"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!-- SOS Title -->
+    <TextView
+        android:id="@+id/sos_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Emergency SOS"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"/>
+
+    <!-- SOS Subtitle -->
+    <TextView
+        android:id="@+id/sos_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quickly contact emergency services"
+        android:textSize="13sp"
+        android:textColor="#FFB3B0"
+        android:layout_marginTop="4dp"/>
+
+</LinearLayout>

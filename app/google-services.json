@@ -12,7 +12,20 @@
           "package_name": "com.example.viaterra"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "7321941572-t8m3h7vtrl5vmkldso10a7qlrombjvfr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.viaterra",
+            "certificate_hash": "1e9c4c78162dd0778cfe173aa3951632aa43a43a"
+          }
+        },
+        {
+          "client_id": "7321941572-3g9stkrtct081e0dbacr9l1kd9out2q2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyB5GmzOHp96qXr6-pNaYQK55e-XzWMIBt8"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "7321941572-3g9stkrtct081e0dbacr9l1kd9out2q2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

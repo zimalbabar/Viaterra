@@ -15,6 +15,27 @@ object RetrofitClient {
             .create(EarthquakeApi::class.java)
     }
 
+    private const val TORNADO_BASE_URL = "https://api.weather.gov/"
+
+    val Tornadoapi: NoaaApi by lazy {
+        Retrofit.Builder()
+            .baseUrl(TORNADO_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(NoaaApi::class.java)
+    }
+
+
+    private const val FLOOD_BASE_URL = "https://api.weather.gov/"
+
+    val floodapi: FloodApi by lazy {
+        Retrofit.Builder()
+            .baseUrl(FLOOD_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(FloodApi::class.java)
+    }
+
 
 
 

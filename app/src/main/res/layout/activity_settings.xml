@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@android:color/white">
 
@@ -20,7 +21,7 @@
             android:layout_centerVertical="true"
             android:src="@android:drawable/ic_menu_revert"
             android:background="@color/primary_green"
-            android:tint="@color/white"/>
+            app:tint="@color/white"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -56,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/background_gray"
+                android:background="@color/medium_green"
                 android:padding="16dp"
                 android:layout_marginBottom="16dp">
 
@@ -81,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:thumbTint="@color/primary_green"
-                        android:trackTint="@color/light_green" />
+                        android:trackTint="@color/primary_green" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -105,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:thumbTint="@color/primary_green"
-                        android:trackTint="@color/light_green"  />
+                        android:trackTint="@color/primary_green"  />
                 </LinearLayout>
 
                 <LinearLayout
@@ -128,7 +129,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:thumbTint="@color/primary_green"
-                        android:trackTint="@color/light_green"  />
+                        android:trackTint="@color/primary_green"  />
                 </LinearLayout>
             </LinearLayout>
 
@@ -189,7 +190,7 @@
                     android:id="@+id/seekBarRadius"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:max="500"
+                    android:max="2000"
                     android:progress="100"
                     android:progressTint="@color/primary_green"
                     android:thumbTint="@color/medium_green"
@@ -220,7 +221,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/background_gray"
+                android:background="@color/extra_light_green"
                 android:padding="16dp"
                 android:layout_marginBottom="16dp">
 
@@ -245,7 +246,7 @@
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:thumbTint="@color/primary_green"
-                        android:trackTint="@color/light_green" />
+                        android:trackTint="@color/extra_light_green" />
                 </LinearLayout>
 
                 <TextView
@@ -289,7 +290,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/background_gray"
+                android:background="@color/extra_light_green"
                 android:padding="16dp"
                 android:layout_marginBottom="16dp">
 
@@ -347,7 +348,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/background_gray"
+                android:background="@color/extra_light_green"
                 android:padding="16dp">
 
                 <TextView

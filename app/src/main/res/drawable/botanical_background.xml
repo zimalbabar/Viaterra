@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Adding tropical leaf pattern background to match reference design -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Dark green botanical base -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#1B3A2F" />
+        </shape>
+    </item>
+
+    <!-- Simplified background to prevent crashes - using solid color instead of bitmap pattern -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#1B3A2F" />
+        </shape>
+    </item>
+</layer-list>

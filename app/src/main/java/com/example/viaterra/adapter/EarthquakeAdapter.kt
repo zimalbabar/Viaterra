@@ -17,6 +17,7 @@ class EarthquakeAdapter(
         val tvLocation: TextView = view.findViewById(R.id.tvLocation)
         val tvTime: TextView = view.findViewById(R.id.tvTime)
 
+        val tvDistance: TextView = view.findViewById(R.id.tvDistance)
         init {
             view.setOnClickListener {
                 onItemClick(list[adapterPosition])
@@ -35,7 +36,9 @@ class EarthquakeAdapter(
         holder.tvMagnitude.text = quake.magnitude
         holder.tvLocation.text = quake.location
         holder.tvTime.text = quake.time
+        holder.tvDistance.text = "Distance from you: ${quake.distance}" // <-- Add this line
     }
+
 
     override fun getItemCount(): Int = list.size
 }
