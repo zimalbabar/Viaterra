@@ -12,6 +12,9 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.hardware.CAMERA"/>
+    <uses-permission android:name="android.hardware.SEND_SMS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
 
 
     <application
@@ -34,6 +37,10 @@
         <activity android:name=".TornadoActivity" />
         <activity android:name=".FloodActivity"/>
         <activity android:name=".SignupActivity"/>
+        <activity android:name=".OpenActivity"/>
+        <activity android:name=".ChatbotActivity" />
+        <activity android:name=".RecoveryActivity" />
+        <activity android:name=".FaqActivity" />
         <activity android:name=".MainActivity"/>
         <activity
             android:name=".SplashActivity"

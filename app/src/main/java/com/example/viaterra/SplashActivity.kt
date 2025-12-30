@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
             if (user != null) {
                 startActivity(Intent(this, DashboardActivity::class.java))
             } else {
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, OpenActivity::class.java))
             }
 
             finish()

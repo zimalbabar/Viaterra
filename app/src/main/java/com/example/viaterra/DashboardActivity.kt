@@ -10,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.viaterra.data.EmergencyContact
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -54,6 +55,8 @@ class DashboardActivity : AppCompatActivity() {
 
         findViewById<MaterialCardView>(R.id.card_sos).setOnClickListener {
             Toast.makeText(this, "Opening Emergency Contacts...", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
 
         findViewById<MaterialCardView>(R.id.card_what_to_do).setOnClickListener {

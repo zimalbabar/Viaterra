@@ -2,29 +2,28 @@ package com.example.viaterra
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.viaterra.databinding.ActivityMainBinding
 
-class MainActivity: AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setContentView(R.layout.activity_open)
-
-
-        val button = findViewById<Button>(R.id.sign_in_button)
-        button.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+        binding.btnChatbot.setOnClickListener {
+            startActivity(Intent(this, ChatbotActivity::class.java))
         }
 
-        val text = findViewById<TextView>(R.id.create_account_text)
-        text.setOnClickListener {
-            val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
+        binding.btnRecovery.setOnClickListener {
+            startActivity(Intent(this, RecoveryActivity::class.java))
         }
 
+        binding.btnFaq.setOnClickListener {
+            startActivity(Intent(this, FaqActivity::class.java))
+        }
     }
 }
