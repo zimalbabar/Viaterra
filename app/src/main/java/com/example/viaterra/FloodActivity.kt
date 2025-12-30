@@ -21,6 +21,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import okhttp3.*
@@ -361,11 +362,21 @@ class FloodActivity : AppCompatActivity() {
             holder.tvDescriptionPreview.text = alert.description.ifEmpty { "No description available" }
 
             when (alert.alertlevel.uppercase()) {
-                "RED" -> holder.headerLayout.setBackgroundColor(getColor(android.R.color.holo_red_dark))
-                "ORANGE" -> holder.headerLayout.setBackgroundColor(getColor(android.R.color.holo_orange_dark))
-                "GREEN" -> holder.headerLayout.setBackgroundColor(getColor(android.R.color.holo_green_dark))
-                else -> holder.headerLayout.setBackgroundColor(getColor(android.R.color.darker_gray))
+                "RED" -> holder.headerLayout.setBackgroundColor(
+                    ContextCompat.getColor(holder.itemView.context, R.color.pastel_red)
+                )
+                "ORANGE" -> holder.headerLayout.setBackgroundColor(
+                    ContextCompat.getColor(holder.itemView.context, R.color.pastel_orange)
+                )
+                "GREEN" -> holder.headerLayout.setBackgroundColor(
+                    ContextCompat.getColor(holder.itemView.context, R.color.pastel_green)
+                )
+                else -> holder.headerLayout.setBackgroundColor(
+                    ContextCompat.getColor(holder.itemView.context, R.color.pastel_grey)
+                )
             }
+
+
 
             holder.btnViewOnMap.setOnClickListener {
                 if (alert.latitude.isNotEmpty() && alert.longitude.isNotEmpty()) {

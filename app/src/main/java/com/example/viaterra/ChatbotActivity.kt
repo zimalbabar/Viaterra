@@ -64,6 +64,8 @@ class ChatbotActivity : AppCompatActivity() {
             else -> "I can help with Earthquakes, Floods, and Fires. Please ask specifically about these events."
         }
     }
+
+
 }
 
 class ChatAdapter(private val messages: List<ChatMessage>) : RecyclerView.Adapter<ChatAdapter.ChatViewHolder>() {

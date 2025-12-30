@@ -44,6 +44,11 @@ class DashboardActivity : AppCompatActivity() {
             selectProfileImage()
         }
 
+//        findViewById<ImageView>(R.id.btn_settings).setOnClickListener {
+//            val intent = Intent(this, SettingsActivity::class.java)
+//            startActivity(intent)
+//        }
+
         // Dashboard cards
         findViewById<MaterialCardView>(R.id.card_track_disasters).setOnClickListener {
             startActivity(Intent(this, DisasterSelectionActivity::class.java))
@@ -54,7 +59,7 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         findViewById<MaterialCardView>(R.id.card_sos).setOnClickListener {
-            Toast.makeText(this, "Opening Emergency Contacts...", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Opening Emergency Contacts...", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
@@ -64,20 +69,29 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         findViewById<MaterialCardView>(R.id.card_chatbot).setOnClickListener {
-            Toast.makeText(this, "Opening Chatbot...", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Opening Chatbot...", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, ChatbotActivity::class.java))
         }
 
-        findViewById<ImageButton>(R.id.btn_logout).setOnClickListener {
+        findViewById<MaterialCardView>(R.id.card_faqs).setOnClickListener {
+//            Toast.makeText(this, "Opening Chatbot...", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, FaqActivity::class.java))
+        }
+        findViewById<MaterialCardView>(R.id.card_post_disaster).setOnClickListener {
+//            Toast.makeText(this, "Opening Chatbot...", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, RecoveryActivity::class.java))
+        }
+
+        findViewById<TextView>(R.id.tv_logout_link).setOnClickListener {
             logoutUser()
         }
-    }
 
-    override fun onStart() {
-        super.onStart()
-        if (auth.currentUser == null) {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
+        findViewById<ImageView>(R.id.btn_settings).setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
         }
+
+
     }
 
     private fun logoutUser() {
@@ -90,6 +104,15 @@ class DashboardActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+    override fun onStart() {
+        super.onStart()
+        if (auth.currentUser == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+    }
+
 
     // ---------------- USER DATA ----------------
 

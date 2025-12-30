@@ -25,6 +25,16 @@
         <item name="cardBackgroundColor">#FF3B30</item>
     </style>
 
+    <style name="CardStyleBotanical">
+        <item name="cardBackgroundColor">#F9FBF9</item> <!-- Very light green tint -->
+        <item name="cardCornerRadius">20dp</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeColor">@color/sage_green</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
 
 
 

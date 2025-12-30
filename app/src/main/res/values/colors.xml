@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary_green">#4CAF50</color>
-    <color name="dark_green">#2E7D32</color>
-    <color name="medium_green">#66BB6A</color>
+    <color name="primary_green">#5A7A5A</color>
+    <color name="dark_green">#2A3A2A</color>
+    <color name="medium_green">#6B7565</color>
     <color name="extra_light_green">#E8F5E9</color>
+    <color name="sage_green">#6B8F71</color>
 
+    <color name="sage_dark">#5A7A5A</color>
+    <color name="sage_light">#E8F5E9</color>
     <!-- Text Colors -->
     <color name="text_primary">#263238</color>
-    <color name="text_secondary">#546E7A</color>
+    <color name="text_secondary">#6B7565</color>
     <color name="text_tertiary">#78909C</color>
 
     <!-- Background Colors -->
@@ -33,6 +36,12 @@
     <color name="black">#FF000000</color>
     <color name="color_61_119_254">#FF3D77FE</color>
     <color name="color_177_177_177">#FFB1B1B1</color>
+
+
+    <color name="pastel_red">#F29B9B</color>         <!-- Danger -->
+    <color name="pastel_orange">#F0B78E</color>      <!-- Warning -->
+    <color name="pastel_green">#C1F0C3</color>       <!-- Safe -->
+    <color name="pastel_grey">#B7BDB5</color>
 
 
 

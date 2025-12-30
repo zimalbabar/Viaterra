@@ -36,7 +36,7 @@
                 android:text="Earthquake Alerts"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:textColor="#2E7D32"
+                android:textColor="@color/dark_green"
                 android:layout_marginStart="8dp" />
         </LinearLayout>
 
@@ -51,7 +51,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@android:drawable/ic_menu_mylocation"
-                android:tint="#666666"/>
+                android:tint="@color/text_secondary"/>
 
             <TextView
                 android:id="@+id/tvLocation"
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:text="Your Location: Loading..."
                 android:textSize="14sp"
-                android:textColor="#666666"
+                android:textColor="@color/text_secondary"
                 android:layout_marginStart="8dp" />
         </LinearLayout>
 
@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:background="#E8F5E9">
+                android:background="@color/extra_light_green">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -84,7 +84,7 @@
                     android:text="Alert Status"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="#2E7D32"
+                    android:textColor="@color/dark_green"
                     android:layout_marginBottom="8dp" />
 
                 <TextView
@@ -93,7 +93,7 @@
                     android:layout_height="wrap_content"
                     android:text="All Clear - No Active Alerts"
                     android:textSize="16sp"
-                    android:textColor="#4CAF50" />
+                    android:textColor="@color/primary_green" />
 
                 <TextView
                     android:id="@+id/tvLastUpdate"
@@ -101,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:text="Last Updated: Just now"
                     android:textSize="12sp"
-                    android:textColor="#333333"
+                    android:textColor="@color/text_dark"
                     android:layout_marginTop="4dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -127,7 +127,7 @@
                     android:text="Detection Radius"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="#2E7D32"
+                    android:textColor="@color/dark_green"
                     android:layout_marginBottom="8dp" />
 
                 <LinearLayout
@@ -141,7 +141,7 @@
                         android:layout_height="wrap_content"
                         android:text="50 km"
                         android:textSize="14sp"
-                        android:textColor="#666666" />
+                        android:textColor="@color/text_secondary" />
 
                     <SeekBar
                         android:id="@+id/seekBarRadius"
@@ -152,15 +152,15 @@
                         android:layout_marginEnd="12dp"
                         android:max="4950"
                         android:progress="200"
-                        android:progressTint="#4CAF50"
-                        android:thumbTint="#4CAF50" />
+                        android:progressTint="@color/primary_green"
+                        android:thumbTint="@color/primary_green" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="5000 km"
                         android:textSize="14sp"
-                        android:textColor="#666666" />
+                        android:textColor="@color/text_secondary" />
                 </LinearLayout>
 
                 <TextView
@@ -169,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:text="Current: 200 km"
                     android:textSize="14sp"
-                    android:textColor="#4CAF50"
+                    android:textColor="@color/primary_green"
                     android:textStyle="bold"
                     android:layout_marginTop="8dp"
                     android:layout_gravity="center_horizontal" />
@@ -183,17 +183,17 @@
             android:text="Recent Earthquakes"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#2E7D32"
+            android:textColor="@color/dark_green"
             android:layout_marginBottom="12dp" />
 
-        <!-- Added empty state layout with happy image -->
+        <!-- Empty State Layout -->
         <LinearLayout
             android:id="@+id/emptyStateLayout"
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:orientation="vertical"
             android:gravity="center"
-            android:background="#FAFAFA"
+            android:background="@color/text_tertiary"
             android:visibility="gone"
             android:padding="32dp">
 
@@ -209,7 +209,7 @@
                 android:text="All Clear!"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:textColor="#4CAF50"
+                android:textColor="@color/primary_green"
                 android:layout_marginTop="16dp" />
 
             <TextView
@@ -217,7 +217,7 @@
                 android:layout_height="wrap_content"
                 android:text="No earthquakes detected in your area"
                 android:textSize="16sp"
-                android:textColor="#666666"
+                android:textColor="@color/text_secondary"
                 android:gravity="center"
                 android:layout_marginTop="8dp" />
         </LinearLayout>
@@ -227,7 +227,7 @@
             android:layout_width="match_parent"
             android:layout_height="380dp"
             android:layout_marginBottom="16dp"
-            android:background="#FAFAFA"
+            android:background="@color/white"
             android:padding="8dp" />
 
         <!-- Action Button -->
@@ -236,8 +236,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Refresh Data"
-            android:textColor="@android:color/white"
-            android:backgroundTint="#4CAF50"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/primary_green"
             android:padding="12dp" />
     </LinearLayout>
 </ScrollView>

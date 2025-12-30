@@ -15,9 +15,9 @@
         <!-- Updated icon to lotus-like aesthetic with dark color -->
         <ImageView
             android:id="@+id/ivAppIcon"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:src="@drawable/app_icon"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/app_logo"
 
 
             app:layout_constraintTop_toTopOf="parent"
@@ -45,7 +45,7 @@
             android:id="@+id/tvSignupSubtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Take the first step"
+            android:text="Disaster Ready, Anytime, Anywhere"
             android:textSize="16sp"
             android:textColor="#6B7565"
             android:gravity="center"

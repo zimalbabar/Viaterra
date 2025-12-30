@@ -50,7 +50,8 @@
                     android:layout_height="wrap_content"
                     android:text="Country"
                     android:textSize="14sp"
-                    android:textColor="#757575" />
+                    android:layout_marginTop="2dp"
+                    android:textColor="#FDFDFD" />
             </LinearLayout>
 
 
@@ -72,6 +73,7 @@
                 android:paddingBottom="8dp">
 
                 <TextView
+
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:text="Event ID:"

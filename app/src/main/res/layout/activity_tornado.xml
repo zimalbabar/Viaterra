@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/app_background"
+    android:background="@color/white"
     android:id="@+id/main"
     android:fillViewport="true">
 
@@ -36,7 +35,7 @@
                 android:text="Tornado Alerts"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:textColor="#2E7D32"
+                android:textColor="#5A7A5A"
                 android:layout_marginStart="8dp" />
         </LinearLayout>
 
@@ -51,7 +50,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@android:drawable/ic_menu_mylocation"
-                android:tint="#666666"/>
+                android:tint="#6B7565"/>
 
             <TextView
                 android:id="@+id/tvLocation"
@@ -59,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:text="Your Location: Loading..."
                 android:textSize="14sp"
-                android:textColor="#666666"
+                android:textColor="#6B7565"
                 android:layout_marginStart="8dp" />
         </LinearLayout>
 
@@ -113,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:text="Last Updated: Just now"
                     android:textSize="12sp"
-                    android:textColor="#333333"
+                    android:textColor="#2A3A2A"
                     android:layout_marginTop="4dp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -125,7 +124,7 @@
             android:text="Recent Tornadoes"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#2E7D32"
+            android:textColor="#5A7A5A"
             android:layout_marginBottom="12dp" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -142,8 +141,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Refresh Data"
-            android:textColor="@android:color/white"
-            android:backgroundTint="#4CAF50"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#5A7A5A"
             android:padding="12dp" />
     </LinearLayout>
 </ScrollView>

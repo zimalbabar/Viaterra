@@ -29,7 +29,7 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_back"
                 android:contentDescription="Go back"
-                android:tint="#FF5722" />
+                android:tint="@color/dark_green" />
 
             <TextView
                 android:layout_width="0dp"

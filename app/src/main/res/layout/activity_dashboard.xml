@@ -5,455 +5,418 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/app_background"
+    android:background="@color/background_light"
     tools:context=".DashboardActivity">
 
-    <LinearLayout
+    <!-- Header Section -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header_layout"
-        android:layout_width="0dp"
-        android:background="@color/white"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:background="@color/white"
         android:elevation="4dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Back Button and Title Row -->
         <LinearLayout
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="15dp"
-            android:layout_marginEnd="24dp"
-            android:layout_width="match_parent"
+            android:id="@+id/greeting_container"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_profile"
+            android:layout_marginEnd="16dp">
 
-            <ImageButton
-                android:id="@+id/backButton"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_back"
-                android:contentDescription="Go back"
-                android:tint="#FF5722" />
+            <TextView
+                android:id="@+id/tv_greeting_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome back,"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/tv_greeting"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="USERNAME"
-                android:textColor="#1A1A1A"
-                android:textSize="30sp"
+                android:textColor="@color/text_primary"
+                android:textSize="24sp"
                 android:textStyle="bold"
-                android:fontFamily="sans-serif-medium" />
-
-            <!-- Added logout button before profile picture -->
-            <ImageButton
-                android:id="@+id/btn_logout"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="12dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@android:drawable/ic_lock_power_off"
-                android:contentDescription="Logout"
-                android:tint="#F44336" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_profile"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:contentDescription="Profile picture"
-                android:src="@drawable/ic_profile"
-                android:scaleType="centerCrop" />
-
+                android:ellipsize="end"
+                android:maxLines="1"/>
         </LinearLayout>
 
-    </LinearLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_profile"
+            app:civ_border_width="2dp"
+            app:civ_border_color="@color/sage_green"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-    <!-- Header Section with Icons -->
+        <ImageView
+            android:id="@+id/btn_settings"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_settings"
+            app:tint="@color/sage_dark"
+            android:contentDescription="Settings"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toStartOf="@id/iv_profile"
+            app:layout_constraintBottom_toBottomOf="@id/iv_profile"
+            app:layout_constraintTop_toTopOf="@id/iv_profile" />
 
-    <!-- ScrollView for Cards -->
+        <ImageButton
+            android:id="@+id/btn_logout"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_lock_power_off"
+            app:tint="@color/sage_dark"
+            android:contentDescription="Logout"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toStartOf="@id/btn_settings"
+            app:layout_constraintBottom_toBottomOf="@id/iv_profile"
+            app:layout_constraintTop_toTopOf="@id/iv_profile"
+            android:visibility="gone"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Scrollable Content -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
         android:fillViewport="true"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/header_layout"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_layout">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="24dp">
+            android:padding="24dp">
 
-            <!-- Track Disasters Card - Full Width -->
+            <!-- HERO CARD: Track Disasters -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_track_disasters"
+                style="@style/CardStyleBotanical"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardBackgroundColor="#FFF3E0"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="6dp">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardBackgroundColor="@color/sage_dark">
 
-                <!-- Added FrameLayout with background image and overlay for disasters card -->
-                <FrameLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="24dp">
 
-                    <!-- Background Image for Natural Disasters -->
-                    <ImageView
-                        android:id="@+id/iv_disasters_bg"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:contentDescription="Natural disasters background"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/disasters_background" />
-
-                    <!-- Dark overlay for text readability -->
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#70000000" />
-
-                    <!-- Content -->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="24dp">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
 
                         <ImageView
-                            android:id="@+id/icon_disasters"
-                            android:layout_width="56dp"
-                            android:layout_height="56dp"
-                            android:contentDescription="Track disasters icon"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
                             android:src="@android:drawable/stat_sys_warning"
-                            android:tint="#FFB74D"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:tint="@color/warning_yellow" />
 
                         <TextView
-                            android:id="@+id/tv_disasters_title"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="Track Natural Disasters"
-                            android:textColor="#FFFFFF"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/icon_disasters"
-                            app:layout_constraintTop_toTopOf="@id/icon_disasters" />
+                            android:text="Natural Disasters"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/tv_earthquakes"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:drawablePadding="8dp"
-                            android:text="• Earthquakes"
-                            android:textColor="#EEEEEE"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/icon_disasters" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Get Alerts For Earthquakes, Floods, and Tornadoes."
+                        android:textColor="@color/sage_light"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="4dp"/>
 
-                        <TextView
-                            android:id="@+id/tv_tornadoes"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="• Tornadoes"
-                            android:textColor="#EEEEEE"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tv_earthquakes" />
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Monitor Now"
+                        android:textColor="@color/sage_dark"
+                        app:backgroundTint="@color/white"
+                        app:cornerRadius="20dp"
+                        android:textStyle="bold"
+                        android:clickable="false"
+                        android:focusable="false"/>
+                    <!-- Make button distinct visual but generic click on card handles action -->
 
-                        <TextView
-                            android:id="@+id/tv_floods"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="• Floods"
-                            android:textColor="#EEEEEE"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/tv_tornadoes" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </FrameLayout>
-
+                </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Maps Card - Full Width with Background Image -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_maps"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_marginTop="16dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardBackgroundColor="#E3F2FD"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="6dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quick Actions"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <!-- Background Image for Maps - Replace with your map image -->
-                    <ImageView
-                        android:id="@+id/iv_maps_bg"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:contentDescription="Maps background"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/map_background"/>
-
-                    <!-- Dark overlay for text readability -->
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="#80000000" />
-
-                    <!-- Content -->
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:padding="24dp">
-
-                        <ImageView
-                            android:id="@+id/icon_maps"
-                            android:layout_width="52dp"
-                            android:layout_height="52dp"
-                            android:contentDescription="Maps icon"
-                            android:src="@drawable/map"
-                            android:background="@android:color/transparent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/tv_maps_title"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:text="Maps"
-                            android:textColor="#FFFFFF"
-                            android:textSize="24sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/icon_maps"
-                            app:layout_constraintTop_toTopOf="@id/icon_maps" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text="View danger zones and safe areas"
-                            android:textColor="#EEEEEE"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="@id/tv_maps_title"
-                            app:layout_constraintStart_toStartOf="@id/tv_maps_title"
-                            app:layout_constraintTop_toBottomOf="@id/tv_maps_title" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </FrameLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Emergency Contact and What To Do on same row -->
+            <!-- GRID ROW 1 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:orientation="horizontal"
-                android:weightSum="2">
+                android:baselineAligned="false"
+                android:layout_marginBottom="16dp">
 
-                <!-- Emergency Contact (SOS) Card - Half Width -->
+                <!-- Safety Maps -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_maps"
+                    style="@style/CardStyleBotanical"
+                    android:layout_width="0dp"
+                    android:layout_height="160dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/map"
+                            android:layout_marginBottom="16dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Safety Maps"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- SOS -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_sos"
+                    style="@style/CardStyleBotanical"
                     android:layout_width="0dp"
-                    android:layout_height="180dp"
+                    android:layout_height="160dp"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    app:cardBackgroundColor="#F6B8C6"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="6dp">
+                    android:layout_marginStart="8dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:gravity="center"
-                        android:padding="20dp">
+                        android:padding="16dp">
 
                         <ImageView
-                            android:id="@+id/icon_sos"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:contentDescription="SOS icon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
                             android:src="@android:drawable/stat_sys_phone_call"
-                            android:tint="#D32F2F" />
+                            app:tint="@color/red_accent"
+                            android:layout_marginBottom="16dp"/>
 
                         <TextView
-                            android:id="@+id/tv_sos_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:text="Emergency Contact"
-                            android:textAlignment="center"
-                            android:textColor="#1A1A1A"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="Quick SOS access"
-                            android:textAlignment="center"
-                            android:textColor="#616161"
-                            android:textSize="13sp" />
-
+                            android:text="Emergency SOS"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
                     </LinearLayout>
-
                 </com.google.android.material.card.MaterialCardView>
-
-                <!-- What To Do Card - Half Width -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card_what_to_do"
-                    android:layout_width="0dp"
-                    android:layout_height="180dp"
-                    android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    app:cardBackgroundColor="#F0B1FA"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="6dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:padding="20dp">
-
-                        <ImageView
-                            android:id="@+id/icon_what_to_do"
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:contentDescription="What to do icon"
-                            android:src="@android:drawable/ic_dialog_info"
-                            android:tint="#7B1FA2" />
-
-                        <TextView
-                            android:id="@+id/tv_what_to_do_title"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:text="What To Do"
-                            android:textAlignment="center"
-                            android:textColor="#1A1A1A"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="Safety guidelines"
-                            android:textAlignment="center"
-                            android:textColor="#616161"
-                            android:textSize="13sp" />
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
             </LinearLayout>
 
-            <!-- Chatbot Assistance Card - Full Width -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_chatbot"
+            <!-- GRID ROW 2 -->
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+
+                <!-- Guide / What To Do -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_what_to_do"
+                    style="@style/CardStyleBotanical"
+                    android:layout_width="0dp"
+                    android:layout_height="160dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@android:drawable/ic_menu_help"
+                            app:tint="@color/sage_dark"
+                            android:layout_marginBottom="16dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Safety Guide"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- AI Assistant -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_chatbot"
+                    style="@style/CardStyleBotanical"
+                    android:layout_width="0dp"
+                    android:layout_height="160dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@android:drawable/stat_notify_chat"
+                            app:tint="@color/blue_accent"
+                            android:layout_marginBottom="16dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="AI Assistant"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- GRID ROW 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:layout_marginTop="16dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardBackgroundColor="#BDF6BF"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="6dp">
+                android:baselineAligned="false">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="24dp">
+                <!-- Guide / What To Do -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_faqs"
+                    style="@style/CardStyleBotanical"
+                    android:layout_width="0dp"
+                    android:layout_height="160dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp">
 
-                    <ImageView
-                        android:id="@+id/icon_chatbot"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:contentDescription="Chatbot icon"
-                        android:src="@android:drawable/stat_notify_chat"
-                        android:tint="#388E3C"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="16dp">
 
-                    <TextView
-                        android:id="@+id/tv_chatbot_title"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="Chatbot Assistance"
-                        android:textColor="#1A1A1A"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/icon_chatbot"
-                        app:layout_constraintTop_toTopOf="@id/icon_chatbot" />
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@android:drawable/ic_dialog_info"
+                            app:tint="@color/info"
+                            android:layout_marginBottom="16dp"/>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:text="Get instant help and answers"
-                        android:textColor="#616161"
-                        android:textSize="15sp"
-                        app:layout_constraintEnd_toEndOf="@id/tv_chatbot_title"
-                        app:layout_constraintStart_toStartOf="@id/tv_chatbot_title"
-                        app:layout_constraintTop_toBottomOf="@id/tv_chatbot_title" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Faqs And Help"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!-- AI Assistant -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_post_disaster"
+                    style="@style/CardStyleBotanical"
+                    android:layout_width="0dp"
+                    android:layout_height="160dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="8dp">
 
-            </com.google.android.material.card.MaterialCardView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="16dp">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@android:drawable/stat_notify_chat"
+                            app:tint="@color/blue_accent"
+                            android:layout_marginBottom="16dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Post Disaster"
+                            android:textColor="@color/text_primary"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+
+            <!-- Logout Link (Below Grid) -->
+            <TextView
+                android:id="@+id/tv_logout_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Log Out"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="32dp"
+                android:padding="8dp"/>
 
         </LinearLayout>
-
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

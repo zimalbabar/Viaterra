@@ -26,38 +26,21 @@ class DisasterSelectionActivity : AppCompatActivity() {
 
         // Earthquakes card click listener
         cardEarthquakes.setOnClickListener {
-            navigateToDisasterDetails("Earthquakes")
             val intent= Intent(this, EarthquakeActivity::class.java)
             startActivity(intent)
         }
 
         // Tornadoes card click listener
         cardTornadoes.setOnClickListener {
-            navigateToDisasterDetails("Tornadoes")
             val intent= Intent(this, TornadoActivity::class.java)
             startActivity(intent)
         }
 
         // Floods card click listener
         cardFloods.setOnClickListener {
-            navigateToDisasterDetails("Floods")
             val intent= Intent(this, FloodActivity::class.java)
             startActivity(intent)
         }
     }
 
-    private fun navigateToDisasterDetails(disasterType: String) {
-        // For now, just show a toast message
-        // Later, you can create a new activity to show detailed disaster information
-        Toast.makeText(
-            this,
-            "Selected: $disasterType\nOpening tracking details...",
-            Toast.LENGTH_SHORT
-        ).show()
-
-        // TODO: Uncomment when you create the DisasterDetailsActivity
-        // val intent = Intent(this, DisasterDetailsActivity::class.java)
-        // intent.putExtra("DISASTER_TYPE", disasterType)
-        // startActivity(intent)
-    }
 }

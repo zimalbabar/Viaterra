@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="#F8F8F8">
 
     <!-- Header -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#43A047"
+        android:background="#5A7A5A"
         android:padding="16dp">
 
         <ImageButton
@@ -46,7 +46,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notifications"
+                android:text="Alert Notifications"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/dark_green"
@@ -56,339 +56,220 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@color/primary_green"
+                android:background="@android:color/white"
                 android:padding="16dp"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                android:elevation="2dp">
 
+                <!-- Master notification toggle card -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:background="#F0F8F0"
                     android:layout_marginBottom="12dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Enable Notifications"
-                        android:textSize="16sp"
-                        android:textColor="@color/text_primary" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Master Notifications"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/dark_green" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Enable all disaster alerts"
+                            android:textSize="13sp"
+                            android:textColor="#888888"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
 
                     <Switch
                         android:id="@+id/switchNotifications"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:thumbTint="@color/primary_green"
-                        android:trackTint="@color/primary_green" />
+                        android:thumbTint="#4CAF50"
+                        android:trackTint="#C8E6C9" />
                 </LinearLayout>
 
+                <!-- Earthquake Alerts Card -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:layout_marginBottom="12dp">
+                    android:padding="16dp"
+                    android:background="@android:color/white"
+                    android:layout_marginBottom="12dp"
+                    android:elevation="1dp">
 
-                    <TextView
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_earthquake"
+                        android:tint="#D32F2F"
+                        android:scaleType="centerInside"
+                        android:layout_marginEnd="16dp" />
+
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Earthquake Alerts"
-                        android:textSize="16sp"
-                        android:textColor="@color/text_primary" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Earthquake Alerts"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Get notified of seismic activity"
+                            android:textSize="12sp"
+                            android:textColor="#999999"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
 
                     <Switch
                         android:id="@+id/switchEarthquake"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:thumbTint="@color/primary_green"
-                        android:trackTint="@color/primary_green"  />
+                        android:thumbTint="#4CAF50"
+                        android:trackTint="#C8E6C9" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Volcano Alerts"
-                        android:textSize="16sp"
-                        android:textColor="@color/text_primary" />
-
-                    <Switch
-                        android:id="@+id/switchVolcano"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:thumbTint="@color/primary_green"
-                        android:trackTint="@color/primary_green"  />
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Alert Thresholds -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Alert Thresholds"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/dark_green"
-                android:layout_marginBottom="12dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="#F5F5F5"
-                android:padding="16dp"
-                android:layout_marginBottom="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Minimum Earthquake Magnitude"
-                    android:textSize="14sp"
-                    android:textColor="#666666" />
-
-                <SeekBar
-                    android:id="@+id/seekBarMagnitude"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:max="90"
-                    android:progress="40"
-                    android:progressTint="@color/primary_green"
-                    android:thumbTint="@color/medium_green"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="4dp" />
-
-                <TextView
-                    android:id="@+id/tvMagnitudeValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4.5"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_green"
-                    android:layout_marginBottom="16dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Alert Radius (km)"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_secondary" />
-
-                <SeekBar
-                    android:id="@+id/seekBarRadius"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:max="500"
-                    android:progress="100"
-                    android:progressTint="@color/primary_green"
-                    android:thumbTint="@color/medium_green"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="4dp" />
-
-                <TextView
-                    android:id="@+id/tvRadiusValue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="100 km"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_green" />
-            </LinearLayout>
-
-            <!-- Location Settings -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Location"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#1B5E20"
-                android:layout_marginBottom="12dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/primary_green"
-                android:padding="16dp"
-                android:layout_marginBottom="16dp">
-
+                <!-- Tornado Alerts Card -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:layout_marginBottom="12dp">
+                    android:padding="16dp"
+                    android:background="@android:color/white"
+                    android:layout_marginBottom="12dp"
+                    android:elevation="1dp">
 
-                    <TextView
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_tor"
+                        android:tint="#FF6F00"
+                        android:scaleType="centerInside"
+                        android:layout_marginEnd="16dp" />
+
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Auto-detect Location"
-                        android:textSize="16sp"
-                        android:textColor="@color/text_primary" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tornado Alerts"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Warnings for severe weather"
+                            android:textSize="12sp"
+                            android:textColor="#999999"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
 
                     <Switch
-                        android:id="@+id/switchAutoLocation"
+                        android:id="@+id/switchTornado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:thumbTint="@color/primary_green"
-                        android:trackTint="@color/primary_green" />
+                        android:thumbTint="#4CAF50"
+                        android:trackTint="#C8E6C9" />
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Current Location"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_secondary"
-                    android:layout_marginBottom="4dp" />
-
-                <TextView
-                    android:id="@+id/tvCurrentLocation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Rawalpindi, Punjab, Pakistan"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_primary"
-                    android:layout_marginBottom="12dp" />
-
-                <Button
-                    android:id="@+id/btnUpdateLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Update Location Manually"
-                    android:textColor="@color/white"
-                    android:backgroundTint="@color/primary_green"
-                    android:padding="12dp" />
-            </LinearLayout>
-
-            <!-- Data Settings -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Data And Updates"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/dark_green"
-                android:layout_marginBottom="12dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/primary_green"
-                android:padding="16dp"
-                android:layout_marginBottom="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Refresh Interval"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_secondary"
-                    android:layout_marginBottom="8dp" />
-
-                <Spinner
-                    android:id="@+id/spinnerRefreshInterval"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:background="@android:color/white"
-                    android:layout_marginBottom="16dp" />
-
+                <!-- Flood Alerts Card -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:background="@android:color/white"
+                    android:elevation="1dp">
 
-                    <TextView
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_flood"
+                        android:tint="#1976D2"
+                        android:scaleType="centerInside"
+                        android:layout_marginEnd="16dp" />
+
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Use Wi-Fi Only"
-                        android:textSize="16sp"
-                        android:textColor="#212121" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Flood Alerts"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="#212121" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Water level and flood warnings"
+                            android:textSize="12sp"
+                            android:textColor="#999999"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
 
                     <Switch
-                        android:id="@+id/switchWifiOnly"
+                        android:id="@+id/switchFlood"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:thumbTint="#43A047"
-                        android:trackTint="#A5D6A7" />
+                        android:checked="true"
+                        android:thumbTint="#4CAF50"
+                        android:trackTint="#C8E6C9" />
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- About Section -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="About"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/dark_green"
-                android:layout_marginBottom="12dp" />
-
-            <LinearLayout
+            <!-- Added logout button section at the bottom -->
+            <Button
+                android:id="@+id/btnLogout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/primary_green"
-                android:padding="16dp">
+                android:layout_height="56dp"
+                android:text="Logout"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:backgroundTint="#5A7A5A"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:elevation="2dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="App Version: 1.0.0"
-                    android:textSize="16sp"
-                    android:textColor="@color/text_primary"
-                    android:layout_marginBottom="8dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Last Data Update: 2 minutes ago"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_secondary"
-                    android:layout_marginBottom="16dp" />
-
-                <Button
-                    android:id="@+id/btnPrivacyPolicy"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Privacy Policy"
-                    android:textColor="@color/primary_green"
-                    android:backgroundTint="@color/white"
-                    android:strokeColor="@color/primary_green"
-                    android:strokeWidth="2"
-                    android:padding="12dp"
-                    android:layout_marginBottom="8dp" />
-
-                <Button
-                    android:id="@+id/btnAbout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="About This App"
-                    android:textColor="@color/primary_green"
-                    android:backgroundTint="@color/white"
-                    android:strokeColor="@color/primary_green"
-                    android:strokeWidth="2"
-                    android:padding="12dp" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
