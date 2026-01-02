@@ -14,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -81,6 +82,10 @@ class FloodActivity : AppCompatActivity() {
 
         // Initial fetch
         fetchGDACSAlerts()
+
+        findViewById<ImageView>(R.id.BackBtn).setOnClickListener {
+            startActivity(Intent(this, DisasterSelectionActivity::class.java))
+        }
 
         // testing notifications
 

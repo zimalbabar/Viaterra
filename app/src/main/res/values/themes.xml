@@ -37,6 +37,11 @@
 
 
 
+    <style name="Theme.DisasterSafe" parent="Base.Theme.Viaterra" />
+
+    <style name="Theme.DisasterSafe.AppBarOverlay" parent="ThemeOverlay.Material3.Dark.ActionBar" />
+
+    <style name="Theme.DisasterSafe.PopupOverlay" parent="ThemeOverlay.Material3.Light" />
 
 
 

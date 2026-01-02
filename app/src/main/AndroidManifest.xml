@@ -26,6 +26,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Viaterra">
+
+        <meta-data
+            android:name="MAPBOX_ACCESS_TOKEN"
+            android:value="@string/mapbox_access_token" />
+
+
         <activity
             android:name=".SettingsActivity" />
         <activity android:name=".AlertActivity" />
@@ -42,6 +48,7 @@
         <activity android:name=".RecoveryActivity" />
         <activity android:name=".FaqActivity" />
         <activity android:name=".MainActivity"/>
+        <activity android:name=".MapsActivity"/>
         <activity
             android:name=".SplashActivity"
             android:exported="true">

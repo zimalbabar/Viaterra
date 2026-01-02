@@ -6,7 +6,5 @@ import retrofit2.http.GET
 
 interface FloodApi {
     @GET("alerts/active/?event=Flood Warning")
-
-
     fun getActiveAlerts(): Call<FloodResponse>
 }

@@ -19,48 +19,50 @@
 
     <!-- Accent Colors -->
     <color name="red_accent">#E53935</color>
-    <color name="orange_accent">#FF6F00</color>
     <color name="blue_accent">#1E88E5</color>
-    <color name="purple_accent">#8E24AA</color>
 
     <!-- Status Colors -->
-    <color name="success">#4CAF50</color>
-    <color name="warning">#FF9800</color>
-    <color name="danger">#F44336</color>
     <color name="info">#2196F3</color>
-<!--    <color name="text_primary">#212121</color>-->
-<!--    <color name="text_secondary">#666666</color>-->
-<!--    <color name="text_tertiary">#999999</color>-->
+
     <color name="warning_yellow">#FFF9C4</color>
-    <color name="warning_orange">#F57C00</color>
-    <color name="black">#FF000000</color>
-    <color name="color_61_119_254">#FF3D77FE</color>
-    <color name="color_177_177_177">#FFB1B1B1</color>
 
 
-    <color name="pastel_red">#F29B9B</color>         <!-- Danger -->
-    <color name="pastel_orange">#F0B78E</color>      <!-- Warning -->
-    <color name="pastel_green">#C1F0C3</color>       <!-- Safe -->
+    <color name="pastel_red">#9E3B32</color>         <!-- Danger -->
+    <color name="pastel_orange">#C27A3A</color>      <!-- Warning -->
+    <color name="pastel_green">#5F7354</color>       <!-- Safe -->
     <color name="pastel_grey">#B7BDB5</color>
 
 
 
-    <color name="bg_dark">#0F172A</color>
-    <color name="card_dark">#1E293B</color>
     <color name="blue">#3B82F6</color>
-<!--    <color name="text_primary">#FFFFFF</color>-->
-<!--    <color name="text_secondary">#94A3B8</color>-->
 
 
 
-        <color name="botanical_green">#2D5F3F</color>
-        <color name="botanical_dark">#1A3A2B</color>
+    <color name="botanical_green">#2D5F3F</color>
 
-        <color name="text_dark">#1A1A1A</color>
-        <color name="text_hint">#9E9E9E</color>
-
-        <color name="input_background">#F5F5F5</color>
+    <color name="text_dark">#1A1A1A</color>
 
 
 
+
+    <color name="hint_green">#5A6B5A</color>
+    <color name="divider_color">#C8CFC8</color>
+    <color name="text_dark_grey">#2C2C2C</color>
+
+
+    <color name="emergency_red">#D32F2F</color>
+    <color name="emergency_red_light">#FFEBEE</color>
+    <color name="police_blue">#1976D2</color>
+    <color name="police_blue_light">#E3F2FD</color>
+    <color name="hospital_green">#388E3C</color>
+    <color name="hospital_green_light">#E8F5E9</color>
+    <color name="advisor_purple">#7B1FA2</color>
+    <color name="advisor_purple_light">#F3E5F5</color>
+    <color name="guide_orange">#F57C00</color>
+    <color name="guide_orange_light">#FFF3E0</color>
+    <color name="faq_teal">#00796B</color>
+    <color name="faq_teal_light">#E0F2F1</color>
+    <color name="gray_light">#F5F5F5</color>
+<!--    <color name="text_primary">#212121</color>-->
+<!--    <color name="text_secondary">#757575</color>-->
 </resources>

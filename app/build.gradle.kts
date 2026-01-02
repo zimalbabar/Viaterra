@@ -136,5 +136,16 @@ dependencies {
 
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
+    // Mapbox Maps SDK
+    implementation("com.mapbox.maps:android:11.0.0")
+
+    // Coroutines for async operations
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+
+    // ViewModel and LiveData (optional, for better architecture)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+
 
 }

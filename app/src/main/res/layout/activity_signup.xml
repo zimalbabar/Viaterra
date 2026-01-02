@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@color/white"
     android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,7 +33,7 @@
             android:text="Your journey starts here"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="#2C2C2C"
+            android:textColor="@color/text_dark_grey"
             android:gravity="center"
             app:layout_constraintTop_toBottomOf="@id/ivAppIcon"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:text="Disaster Ready, Anytime, Anywhere"
             android:textSize="16sp"
-            android:textColor="#6B7565"
+            android:textColor="@color/medium_green"
             android:gravity="center"
             app:layout_constraintTop_toBottomOf="@id/tvSignupTitle"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:src="@android:drawable/ic_dialog_email"
-                    android:tint="#5A6B5A" />
+                    android:tint="@color/hint_green" />
 
                 <EditText
                     android:id="@+id/etSignupEmail"
@@ -92,8 +92,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="12dp"
                     android:hint="E-mail"
-                    android:textColorHint="#5A6B5A"
-                    android:textColor="#2C2C2C"
+                    android:textColorHint="@color/hint_green"
+                    android:textColor="@color/text_dark_grey"
                     android:textSize="16sp"
                     android:background="@null"
                     android:inputType="textEmailAddress"
@@ -117,7 +117,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:src="@android:drawable/ic_menu_myplaces"
-                    android:tint="#5A6B5A" />
+                    android:tint="@color/hint_green" />
 
                 <EditText
                     android:id="@+id/etSignupUsername"
@@ -127,8 +127,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="12dp"
                     android:hint="Username"
-                    android:textColorHint="#5A6B5A"
-                    android:textColor="#2C2C2C"
+                    android:textColorHint="@color/hint_green"
+                    android:textColor="@color/text_dark_grey"
                     android:textSize="16sp"
                     android:background="@null"
                     android:inputType="textPersonName"
@@ -152,7 +152,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:src="@android:drawable/ic_lock_idle_lock"
-                    android:tint="#5A6B5A" />
+                    android:tint="@color/hint_green" />
 
                 <EditText
                     android:id="@+id/etSignupPassword"
@@ -163,21 +163,21 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="12dp"
                     android:hint="Password"
-                    android:textColorHint="#5A6B5A"
-                    android:textColor="#2C2C2C"
+                    android:textColorHint="@color/hint_green"
+                    android:textColor="@color/text_dark_grey"
                     android:textSize="16sp"
                     android:background="@null"
                     android:inputType="textPassword"
                     android:paddingVertical="8dp" />
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/passwordToggle"-->
-<!--                    android:layout_width="24dp"-->
-<!--                    android:layout_height="24dp"-->
-<!--                    android:layout_alignParentEnd="true"-->
-<!--                    android:layout_centerVertical="true"-->
-<!--                    android:src="@android:drawable/ic_menu_view"-->
-<!--                    android:tint="#5A6B5A" />-->
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/passwordToggle"-->
+                <!--                    android:layout_width="24dp"-->
+                <!--                    android:layout_height="24dp"-->
+                <!--                    android:layout_alignParentEnd="true"-->
+                <!--                    android:layout_centerVertical="true"-->
+                <!--                    android:src="@android:drawable/ic_menu_view"-->
+                <!--                    android:tint="#5A6B5A" />-->
             </RelativeLayout>
 
             <RelativeLayout
@@ -197,7 +197,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:src="@android:drawable/ic_lock_idle_lock"
-                    android:tint="#5A6B5A" />
+                    android:tint="@color/hint_green" />
 
                 <EditText
                     android:id="@+id/etConfirmPassword"
@@ -208,21 +208,21 @@
                     android:layout_centerVertical="true"
                     android:layout_marginStart="12dp"
                     android:hint="Confirm password"
-                    android:textColorHint="#5A6B5A"
-                    android:textColor="#2C2C2C"
+                    android:textColorHint="@color/hint_green"
+                    android:textColor="@color/text_dark_grey"
                     android:textSize="16sp"
                     android:background="@null"
                     android:inputType="textPassword"
                     android:paddingVertical="8dp" />
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/confirmPasswordToggle"-->
-<!--                    android:layout_width="24dp"-->
-<!--                    android:layout_height="24dp"-->
-<!--                    android:layout_alignParentEnd="true"-->
-<!--                    android:layout_centerVertical="true"-->
-<!--                    android:src="@android:drawable/ic_menu_view"-->
-<!--                    android:tint="#5A6B5A" />-->
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/confirmPasswordToggle"-->
+                <!--                    android:layout_width="24dp"-->
+                <!--                    android:layout_height="24dp"-->
+                <!--                    android:layout_alignParentEnd="true"-->
+                <!--                    android:layout_centerVertical="true"-->
+                <!--                    android:src="@android:drawable/ic_menu_view"-->
+                <!--                    android:tint="#5A6B5A" />-->
             </RelativeLayout>
 
             <!-- Sage green button with clean styling -->
@@ -234,7 +234,7 @@
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 android:textAllCaps="false"
-                app:backgroundTint="#6B8F71"
+                app:backgroundTint="@color/sage_green"
                 app:cornerRadius="28dp"
                 android:layout_marginTop="24dp" />
 
@@ -250,13 +250,13 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="1"
-                    android:background="#C5CEC0" />
+                    android:background="@color/divider_color" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="or"
-                    android:textColor="#6B7565"
+                    android:textColor="@color/medium_green"
                     android:textSize="14sp"
                     android:paddingHorizontal="16dp" />
 
@@ -264,7 +264,7 @@
                     android:layout_width="0dp"
                     android:layout_height="1dp"
                     android:layout_weight="1"
-                    android:background="#C5CEC0" />
+                    android:background="@color/divider_color" />
             </LinearLayout>
 
             <!-- Added social login icons -->
@@ -290,7 +290,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sign Up with Google"
-                    android:textColor="#2C2C2C"
+                    android:textColor="@color/text_dark_grey"
                     android:textSize="16sp"/>
             </LinearLayout>
 
@@ -302,7 +302,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Already have an account?  Sign in"
-            android:textColor="#3D4F3D"
+            android:textColor="@color/dark_green"
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@id/inputContainer"
             app:layout_constraintStart_toStartOf="parent"

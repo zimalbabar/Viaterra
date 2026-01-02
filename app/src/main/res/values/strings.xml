@@ -40,6 +40,29 @@
     <string name="second_fragment_label">Second Fragment</string>
 
 
+    <string name="sos_emergency">SOS Emergency</string>
+    <string name="ai_advisor">AI Disaster Advisor</string>
+    <string name="emergency_profile">Emergency Profile</string>
+    <string name="nearby_services">Nearby Services</string>
+    <string name="recovery_guide">Recovery Guide</string>
+    <string name="faqs">FAQs</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="save_profile">Save Profile</string>
+    <string name="hospitals">Hospitals</string>
+    <string name="police_stations">Police Stations</string>
+    <string name="find_help">Find Nearby Help</string>
+    <string name="medical_info">Medical Information</string>
+    <string name="full_name">Full Name</string>
+    <string name="blood_group">Blood Group</string>
+    <string name="allergies">Allergies</string>
+    <string name="medical_conditions">Medical Conditions</string>
+    <string name="emergency_note">Emergency Note (Optional)</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="services">Services</string>
+    <string name="location_permission_required">Location permission is required to find nearby services.</string>
+
+
 
 
 </resources>

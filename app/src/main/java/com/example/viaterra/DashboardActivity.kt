@@ -55,13 +55,14 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         findViewById<MaterialCardView>(R.id.card_maps).setOnClickListener {
-            Toast.makeText(this, "Opening Maps...", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Opening Maps...", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, MapsActivity::class.java))
         }
 
         findViewById<MaterialCardView>(R.id.card_sos).setOnClickListener {
 //            Toast.makeText(this, "Opening Emergency Contacts...", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
         }
 
         findViewById<MaterialCardView>(R.id.card_what_to_do).setOnClickListener {
