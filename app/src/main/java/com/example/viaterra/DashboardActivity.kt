@@ -25,7 +25,7 @@ class DashboardActivity : AppCompatActivity() {
 
     private val PICK_IMAGE_REQUEST = 1001
 
-    // SharedPreferences
+    // SharedPreferences to store profile picture
     private val PREFS_NAME = "user_prefs"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,10 +44,6 @@ class DashboardActivity : AppCompatActivity() {
             selectProfileImage()
         }
 
-//        findViewById<ImageView>(R.id.btn_settings).setOnClickListener {
-//            val intent = Intent(this, SettingsActivity::class.java)
-//            startActivity(intent)
-//        }
 
         // Dashboard cards
         findViewById<MaterialCardView>(R.id.card_track_disasters).setOnClickListener {
@@ -61,12 +57,13 @@ class DashboardActivity : AppCompatActivity() {
 
         findViewById<MaterialCardView>(R.id.card_sos).setOnClickListener {
 //            Toast.makeText(this, "Opening Emergency Contacts...", Toast.LENGTH_SHORT).show()
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, SosActivity::class.java)
+            startActivity(intent)
         }
 
         findViewById<MaterialCardView>(R.id.card_what_to_do).setOnClickListener {
-            Toast.makeText(this, "Opening Safety Guidelines...", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, QuizActivity::class.java)
+            startActivity(intent)
         }
 
         findViewById<MaterialCardView>(R.id.card_chatbot).setOnClickListener {
@@ -167,7 +164,7 @@ class DashboardActivity : AppCompatActivity() {
                 .placeholder(R.drawable.ic_profile)
                 .into(ivProfile)
 
-            Toast.makeText(this, "Profile picture updated locally", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Profile picture updated", Toast.LENGTH_SHORT).show()
         }
     }
 

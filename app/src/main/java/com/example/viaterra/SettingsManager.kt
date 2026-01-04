@@ -16,23 +16,6 @@ object SettingsManager {
         return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     }
 
-    // Radius settings (in kilometers)
-    fun getRadius(context: Context): Int {
-        return getPrefs(context).getInt(KEY_RADIUS, 200) // Default 200 km
-    }
-
-    fun setRadius(context: Context, radius: Int) {
-        getPrefs(context).edit().putInt(KEY_RADIUS, radius).apply()
-    }
-
-    // Minimum magnitude for earthquakes
-    fun getMinMagnitude(context: Context): Double {
-        return getPrefs(context).getFloat(KEY_MIN_MAGNITUDE, 3.0f).toDouble() // Default 3.0
-    }
-
-    fun setMinMagnitude(context: Context, magnitude: Double) {
-        getPrefs(context).edit().putFloat(KEY_MIN_MAGNITUDE, magnitude.toFloat()).apply()
-    }
 
     // Auto-location setting
     fun autoLocationEnabled(context: Context): Boolean {

@@ -21,7 +21,6 @@ class SplashActivity : AppCompatActivity() {
 
         val logo = findViewById<ImageView>(R.id.iv_logo)
 
-        // Start floating animation
         val floatAnim = AnimationUtils.loadAnimation(this, R.anim.floating)
         logo.startAnimation(floatAnim)
 

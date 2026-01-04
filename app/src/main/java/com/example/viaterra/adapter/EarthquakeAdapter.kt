@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.viaterra.Earthquake
+import com.example.viaterra.data.Earthquake
 import com.example.viaterra.R
 
 class EarthquakeAdapter(

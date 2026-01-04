@@ -5,31 +5,26 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
-import android.widget.SeekBar
+import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.viaterra.adapter.EarthquakeAdapter
 import com.example.viaterra.api.RetrofitClient
+import com.example.viaterra.data.Earthquake
 import com.example.viaterra.model.EarthquakeResponse
-import com.example.viaterra.util.SettingsManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
+import kotlin.math.*
 
 class EarthquakeActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private val LOCATION_PERMISSION_REQUEST_CODE = 100
 
     private lateinit var rvEarthquakes: RecyclerView
     private lateinit var tvAlertStatus: TextView
@@ -39,14 +34,24 @@ class EarthquakeActivity : AppCompatActivity() {
     private lateinit var tvRadiusValue: TextView
     private lateinit var emptyStateLayout: LinearLayout
 
-    private var currentUserLat: Double = 0.0
-    private var currentUserLon: Double = 0.0
+    private var currentUserLat = 0.0
+    private var currentUserLon = 0.0
+
+    private val minMag = 2.5 // Minimum earthquake magnitude
+    private val minRadiusKm = 50
+    private val maxRadiusKm = 2000
+
+
+    private val locationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) getDeviceLocation()
+            else Toast.makeText(this, "Location permission denied!", Toast.LENGTH_SHORT).show()
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_earthquake)
 
-        // Initialize views
         rvEarthquakes = findViewById(R.id.rvEarthquakes)
         tvAlertStatus = findViewById(R.id.tvAlertStatus)
         tvLastUpdate = findViewById(R.id.tvLastUpdate)
@@ -57,188 +62,147 @@ class EarthquakeActivity : AppCompatActivity() {
 
         rvEarthquakes.layoutManager = LinearLayoutManager(this)
 
-        val currentRadius = SettingsManager.getRadius(this)
-        seekBarRadius.progress = currentRadius - 50 // Offset for 50km min
-        tvRadiusValue.text = "Current: $currentRadius km"
+        // Initialize SeekBar
+        seekBarRadius.max = maxRadiusKm - minRadiusKm // progress 0 → 50 km
+        val initialRadius = 100
+        seekBarRadius.progress = initialRadius - minRadiusKm
+        tvRadiusValue.text = "Current: $initialRadius km"
 
         seekBarRadius.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val radiusKm = progress + 50 // Min 50km, max 500km
-                tvRadiusValue.text = "Current: $radiusKm km"
+                tvRadiusValue.text = "Current: ${progress + minRadiusKm} km"
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {}
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                val radiusKm = (seekBar?.progress ?: 0) + 50
-                SettingsManager.setRadius(this@EarthquakeActivity, radiusKm)
-                Toast.makeText(this@EarthquakeActivity, "Radius updated to $radiusKm km", Toast.LENGTH_SHORT).show()
+                val radius = (seekBar?.progress ?: 0) + minRadiusKm
+                Toast.makeText(this@EarthquakeActivity, "Radius updated to $radius km", Toast.LENGTH_SHORT).show()
                 if (currentUserLat != 0.0 && currentUserLon != 0.0) {
-                    loadEarthquakeData(currentUserLat, currentUserLon)
+                    loadEarthquakeData(currentUserLat, currentUserLon, radius)
                 }
             }
         })
 
-        // Back button
-        findViewById<ImageButton>(R.id.btnBack).setOnClickListener {
-            finish()
-        }
-
-        // Refresh button
+        findViewById<ImageButton>(R.id.btnBack).setOnClickListener { finish() }
         findViewById<Button>(R.id.btnRefresh).setOnClickListener {
             Toast.makeText(this, "Fetching earthquake data...", Toast.LENGTH_SHORT).show()
-            checkLocationPermission()
+            requestLocation()
         }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        checkLocationPermission()
+        requestLocation()
     }
 
-    private fun checkLocationPermission() {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                LOCATION_PERMISSION_REQUEST_CODE
-            )
-        } else {
+    // ---------------- Location ----------------
+    private fun requestLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             getDeviceLocation()
-        }
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
-            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                getDeviceLocation()
-            } else {
-                Toast.makeText(this, "Location permission is required", Toast.LENGTH_SHORT).show()
-            }
+        } else {
+            locationPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
     }
 
     private fun getDeviceLocation() {
-        if (!SettingsManager.autoLocationEnabled(this)) {
-            tvLocation.text = "Auto-location disabled"
-            return
-        }
-
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED
         ) return
 
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
             if (location != null) {
                 currentUserLat = location.latitude
                 currentUserLon = location.longitude
-                tvLocation.text = String.format("Your Location: %.4f, %.4f", currentUserLat, currentUserLon)
-                loadEarthquakeData(currentUserLat, currentUserLon)
+                tvLocation.text = "Your Location: %.4f, %.4f".format(currentUserLat, currentUserLon)
+
+                val radius = seekBarRadius.progress + minRadiusKm
+                loadEarthquakeData(currentUserLat, currentUserLon, radius)
             } else {
                 Toast.makeText(this, "Could not get location", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun loadEarthquakeData(userLat: Double, userLon: Double) {
-        val minMag = SettingsManager.getMinMagnitude(this)
-        val maxRadiusKm = SettingsManager.getRadius(this)
-        val earthquakesEnabled = SettingsManager.earthquakeAlertsEnabled(this)
-
-        if (!earthquakesEnabled) {
-            tvAlertStatus.text = "Earthquake alerts are disabled"
-            rvEarthquakes.adapter = EarthquakeAdapter(emptyList()) {}
-            showEmptyState(true)
-            return
-        }
-
+    // ---------------- Earthquake Data ----------------
+    private fun loadEarthquakeData(userLat: Double, userLon: Double, maxRadius: Int) {
         tvLastUpdate.text = "Fetching data..."
 
-        RetrofitClient.api.getEarthquakes()
-            .enqueue(object : Callback<EarthquakeResponse> {
-                override fun onResponse(
-                    call: Call<EarthquakeResponse>,
-                    response: Response<EarthquakeResponse>
-                ) {
-                    val earthquakes = response.body()?.features?.mapNotNull {
-                        val quakeLat = it.geometry.coordinates[1]
-                        val quakeLon = it.geometry.coordinates[0]
-                        val dist = distanceInMiles(userLat, userLon, quakeLat, quakeLon)
-                        val distanceKm = dist * 1.609
+        RetrofitClient.api.getEarthquakes().enqueue(object : Callback<EarthquakeResponse> {
+            override fun onResponse(call: Call<EarthquakeResponse>, response: Response<EarthquakeResponse>) {
+                val earthquakes = filterNearbyEarthquakes(response.body()?.features, userLat, userLon, maxRadius, minMag)
+                updateRecyclerView(earthquakes)
+            }
 
-                        if (distanceKm <= maxRadiusKm &&
-                            (it.properties.mag ?: 0.0) >= minMag) {
+            override fun onFailure(call: Call<EarthquakeResponse>, t: Throwable) {
+                tvAlertStatus.text = "Failed to load data"
+                tvLastUpdate.text = "Error: ${t.message}"
+                showEmptyState(false)
+            }
+        })
+    }
 
-                            Earthquake(
-                                magnitude = it.properties.mag?.toString() ?: "N/A",
-                                location = it.properties.place ?: "Unknown",
-                                time = formatTime(it.properties.time),
-                                distance = String.format("%.1f KM", distanceKm)
-                            )
-                        } else null
-                    } ?: emptyList()
+    private fun filterNearbyEarthquakes(
+        features: List<com.example.viaterra.model.Feature>?,
+        userLat: Double,
+        userLon: Double,
+        maxRadius: Int,
+        minMag: Double
+    ): List<Earthquake> = features?.mapNotNull {
+        val quakeLat = it.geometry.coordinates[1]
+        val quakeLon = it.geometry.coordinates[0]
+        val distanceKm = distanceInMiles(userLat, userLon, quakeLat, quakeLon) * 1.609
 
-                    if (earthquakes.isEmpty()) {
-                        showEmptyState(true)
-                        tvAlertStatus.text = "No nearby earthquakes"
-                    } else {
-                        showEmptyState(false)
-                        rvEarthquakes.adapter = EarthquakeAdapter(earthquakes) { earthquake ->
-                            val intent = Intent(this@EarthquakeActivity, AlertActivity::class.java)
-                            intent.putExtra("magnitude", earthquake.magnitude)
-                            intent.putExtra("location", earthquake.location)
-                            intent.putExtra("time", earthquake.time)
-                            startActivity(intent)
-                        }
-                        tvAlertStatus.text = "Nearby Earthquakes (${earthquakes.size})"
-                    }
+        if (distanceKm <= maxRadius && (it.properties.mag ?: 0.0) >= minMag)
+            Earthquake(
+                magnitude = it.properties.mag?.toString() ?: "N/A",
+                location = it.properties.place ?: "Unknown",
+                time = formatTime(it.properties.time),
+                distance = "%.1f KM".format(distanceKm)
+            )
+        else null
+    } ?: emptyList()
 
-                    tvLastUpdate.text = "Last Updated: Just now"
+    private fun updateRecyclerView(earthquakes: List<Earthquake>) {
+        if (earthquakes.isEmpty()) {
+            showEmptyState(true)
+            tvAlertStatus.text = "No nearby earthquakes"
+        } else {
+            showEmptyState(false)
+            rvEarthquakes.adapter = EarthquakeAdapter(earthquakes) { earthquake ->
+                val intent = Intent(this, AlertActivity::class.java).apply {
+                    putExtra("magnitude", earthquake.magnitude)
+                    putExtra("location", earthquake.location)
+                    putExtra("time", earthquake.time)
                 }
-
-                override fun onFailure(call: Call<EarthquakeResponse>, t: Throwable) {
-                    tvAlertStatus.text = "Failed to load data"
-                    tvLastUpdate.text = "Error: ${t.message}"
-                    showEmptyState(false)
-                }
-            })
+                startActivity(intent)
+            }
+            tvAlertStatus.text = "Nearby Earthquakes (${earthquakes.size})"
+        }
+        tvLastUpdate.text = "Last Updated: Just now"
     }
 
     private fun showEmptyState(show: Boolean) {
-        if (show) {
-            emptyStateLayout.visibility = View.VISIBLE
-            rvEarthquakes.visibility = View.GONE
-        } else {
-            emptyStateLayout.visibility = View.GONE
-            rvEarthquakes.visibility = View.VISIBLE
-        }
+        emptyStateLayout.visibility = if (show) View.VISIBLE else View.GONE
+        rvEarthquakes.visibility = if (show) View.GONE else View.VISIBLE
     }
 
+    // ---------------- Utility ----------------
+    //uses haversince formula to calculate distance between two points on earth
     private fun distanceInMiles(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
         val R = 3958.8 // Radius of Earth in miles
         val dLat = Math.toRadians(lat2 - lat1)
         val dLon = Math.toRadians(lon2 - lon1)
-        val a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
-                Math.sin(dLon / 2) * Math.sin(dLon / 2)
-        val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+        val a = sin(dLat / 2).pow(2.0) +
+                cos(Math.toRadians(lat1)) * cos(Math.toRadians(lat2)) *
+                sin(dLon / 2).pow(2.0)
+        val c = 2 * atan2(sqrt(a), sqrt(1 - a))
         return R * c
     }
 
     private fun formatTime(time: Long?): String {
         if (time == null) return "Unknown time"
         val date = java.util.Date(time)
-        return android.text.format.DateFormat
-            .format("dd MMM, hh:mm a", date)
-            .toString()
+        return android.text.format.DateFormat.format("dd MMM, hh:mm a", date).toString()
     }
+
+    private fun Double.pow(exp: Double) = Math.pow(this, exp)
 }

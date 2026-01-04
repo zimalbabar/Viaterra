@@ -5,7 +5,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface NoaaApi {
-    @GET("alerts/?event=Active Tornado Warning")
+    @GET("alerts/?event=Tornado Warning")
 
     fun getActiveAlerts(): Call<NoaaResponse>
 }

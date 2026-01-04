@@ -1,6 +1,5 @@
 package com.example.viaterra.model
 
-import com.example.viaterra.EarthquakeGeometry
 
 data class EarthquakeResponse(
     val features: List<Feature>
@@ -17,3 +16,8 @@ data class Properties(
     val time: Long?,
     val distance: String // e.g., "12.5 miles"
 )
+
+data class EarthquakeGeometry(
+    val coordinates: List<Double> // [longitude, latitude, depth]
+)
+

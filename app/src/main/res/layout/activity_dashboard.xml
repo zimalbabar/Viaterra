@@ -277,17 +277,19 @@
                         android:gravity="center"
                         android:padding="16dp">
 
-                        <ImageView
+                        <TextView
+
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@android:drawable/ic_menu_help"
-                            app:tint="@color/sage_dark"
-                            android:layout_marginBottom="16dp"/>
+                            android:layout_marginBottom="16dp"
+
+                            android:text="📚"
+                            android:textSize="32sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Safety Guide"
+                            android:text="Safety Quiz"
                             android:textColor="@color/text_primary"
                             android:textStyle="bold"
                             android:textSize="16sp"/>
@@ -310,12 +312,15 @@
                         android:gravity="center"
                         android:padding="16dp">
 
-                        <ImageView
+
+                        <TextView
+                            android:id="@+id/textView"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@android:drawable/stat_notify_chat"
-                            app:tint="@color/blue_accent"
-                            android:layout_marginBottom="16dp"/>
+                            android:layout_marginBottom="16dp"
+
+                            android:text="🤖"
+                            android:textSize="32sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -385,11 +390,11 @@
                         android:gravity="center"
                         android:padding="16dp">
 
-                        <ImageView
+                        <TextView
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:src="@android:drawable/stat_notify_chat"
-                            app:tint="@color/blue_accent"
+                            android:text="📘"
+                            android:textSize="32sp"
                             android:layout_marginBottom="16dp"/>
 
                         <TextView

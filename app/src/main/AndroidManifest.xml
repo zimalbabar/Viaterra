@@ -11,10 +11,14 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- For background location updates (optional) -->
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.hardware.CAMERA"/>
-    <uses-permission android:name="android.hardware.SEND_SMS"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
-
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE"/>
 
 
     <application
@@ -49,6 +53,21 @@
         <activity android:name=".FaqActivity" />
         <activity android:name=".MainActivity"/>
         <activity android:name=".MapsActivity"/>
+        <activity android:name=".EmergencyProfileActivity"/>
+        <activity android:name=".EmergencyContactsActivity"/>
+        <activity android:name=".NearbyServicesActivity"/>
+        <activity android:name=".LockScreenEmergencyActivity"/>
+        <activity android:name=".SosActivity"/>
+        <activity android:name=".QuizActivity"/>
+        
+        <service android:name=".SosService" 
+                 android:foregroundServiceType="specialUse">
+            <property android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE" android:value="emergency_sensor_monitor"/>
+        </service>
+        
+        <service android:name=".VoiceSosService"
+                 android:foregroundServiceType="microphone" />
+        
         <activity
             android:name=".SplashActivity"
             android:exported="true">

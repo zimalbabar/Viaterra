@@ -19,24 +19,20 @@ class DisasterSelectionActivity : AppCompatActivity() {
         val cardTornadoes: MaterialCardView = findViewById(R.id.cardTornadoes)
         val cardFloods: MaterialCardView = findViewById(R.id.cardFloods)
 
-        // Back button click listener
         backButton.setOnClickListener {
-            finish() // Close this activity and return to previous screen
+            finish()
         }
 
-        // Earthquakes card click listener
         cardEarthquakes.setOnClickListener {
             val intent= Intent(this, EarthquakeActivity::class.java)
             startActivity(intent)
         }
 
-        // Tornadoes card click listener
         cardTornadoes.setOnClickListener {
             val intent= Intent(this, TornadoActivity::class.java)
             startActivity(intent)
         }
 
-        // Floods card click listener
         cardFloods.setOnClickListener {
             val intent= Intent(this, FloodActivity::class.java)
             startActivity(intent)
